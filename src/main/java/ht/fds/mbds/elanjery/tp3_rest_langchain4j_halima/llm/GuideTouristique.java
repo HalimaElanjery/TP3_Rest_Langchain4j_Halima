@@ -1,26 +1,27 @@
-
 package ht.fds.mbds.elanjery.tp3_rest_langchain4j_halima.llm;
 
 import dev.langchain4j.service.SystemMessage;
+import dev.langchain4j.service.UserMessage;
+import dev.langchain4j.service.V;
 
 public interface GuideTouristique {
 
     @SystemMessage("""
-        Tu es un guide touristique.
+            Tu es un guide touristique.
+            Réponds STRICTEMENT au schéma demandé.
+            N'ajoute aucun texte hors JSON, n'utilise pas Markdown.
+            """)
 
-        Pour le lieu donné, indique les deux principaux endroits à visiter
-        ainsi que le prix moyen d'un repas dans la devise du pays.
+    @UserMessage("""
+            Donne les informations structurées pour {{lieu}} avec un format JSON.
 
-        Réponds uniquement au format JSON, sans Markdown,
-        sans introduction et sans texte supplémentaire.
+            Contraintes :
+            - "prix_moyen_repas" est une courte chaîne avec devise (ex. "18 EUR").
+            - "endroits_a_visiter" contient les {{nb}} principaux endroits à visiter dans {{lieu}}.
+            """)
 
-        Respecte exactement cette structure :
-
-        {
-          "ville_ou_pays": "nom de la ville ou du pays",
-          "endroits_a_visiter": ["endroit 1", "endroit 2"],
-          "prix_moyen_repas": "<prix> <devise du pays>"
-        }
-        """)
-    String endroitsDeVisite(String villeOuPays);
+    InfosTouristiques chat(
+            @V("lieu") String lieu,
+            @V("nb") int nbAVisiter
+    );
 }
