@@ -40,6 +40,13 @@
             <version>1.23.0-beta33</version>
         </dependency>
 
+        <!-- LangChain4j Easy RAG -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-easy-rag</artifactId>
+            <version>1.23.0-beta33</version>
+        </dependency>
+
     </dependencies>
 
     <build>

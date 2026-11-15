@@ -20,6 +20,14 @@ public class GuideTouristiqueResource {
     @Inject
     private LlmClientForGuideTouristique llmClient;
 
+    /**
+     * Retourne les informations touristiques d'une ville ou d'un pays.
+     *
+     * @param villeOuPays nom de la ville ou du pays à rechercher
+     * @param nb nombre d'endroits à visiter (2 par défaut)
+     * @return réponse JSON contenant le lieu, les endroits à visiter
+     *         et le prix moyen d'un repas
+     */
     @GET
     @Path("lieu/{ville_ou_pays}")
     @Produces(MediaType.APPLICATION_JSON)
